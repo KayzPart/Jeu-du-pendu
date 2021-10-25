@@ -1,0 +1,23 @@
+#motAfficher{
+    display: flex;
+}
+.lettre-Div{
+    font-size: 60px;
+    margin-right: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.lettre-Div::after{
+    content: "";
+    width: 25px;
+    border: solid 2px black;
+    visibility: visible;
+}
+#lettre-saisie{
+    margin-top: 50px;
+    border: thick double red;
+    height: 100px;
+    width: 550px;
+}
