@@ -23,7 +23,7 @@ console.log(imageAfficher);
 
 var badLetter = 0;
 // Générer un mot à trouver 
-var mot = ["libre","charmant","champion","sardaigne","soleil","lune","montagne","solidaire","coquelicot","aventurier","labyrinthe","quadriceps","Maharadjah","Rhododendron","Montgolfière","Abracadabra","Chlorophylle","Qualification","Métamorphose","Baccalauréat","Narrateur","Cabriolet","Printemps","Dangereux","Toujours","Scorpion","Gangster","Oxygène","Lionne","Thym","Rhum"];
+var mot = ["Libre","Charmant","Champion","Sardaigne","Soleil","Lune","Montagne","Solidaire","Coquelicot","Aventurier","Labyrinthe","Quadriceps","Maharadjah","Rhododendron","Montgolfière","Abracadabra","Chlorophylle","Qualification","Métamorphose","Baccalauréat","Narrateur","Cabriolet","Printemps","Dangereux","Toujours","Scorpion","Gangster","Oxygène","Lionne","Thym","Rhum"];
 
 var randomWord = mot[(Math.random() * mot.length) | 0];
 
@@ -114,8 +114,9 @@ function motAfficher(){
 }
 function changeImage(badLetter){
     let img = document.getElementById('img-afficher');
-    if(badLetter <= 4){
+    if(badLetter <= 8){
         img.setAttribute("src", "./Ressources/pendu-"+badLetter+".png");
+        
     }
     else{
         looseGame();
@@ -130,6 +131,9 @@ function looseGame(){
     container.insertBefore(btnRejouer,container.childNodes[2]);
     console.log(container);  
     btnRejouer.addEventListener('click', function(){
-        
+        replay();
     })
+}
+function replay(){
+    location.reload();
 }

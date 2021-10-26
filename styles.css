@@ -1,3 +1,10 @@
+body{
+    height: 80vh;
+    padding: 50px;
+    border: hotpink solid 5px;
+    border-radius: 20px;
+    background-color: rgb(228, 220, 220);
+}
 #motAfficher{
     display: flex;
 }
