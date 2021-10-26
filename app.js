@@ -23,9 +23,10 @@ console.log(imageAfficher);
 
 var badLetter = 0;
 // Générer un mot à trouver 
-var mot = ["Libre","Charmant","Champion","Sardaigne","Soleil","Lune","Montagne","Solidaire","Coquelicot","Aventurier","Labyrinthe","Quadriceps","Maharadjah","Rhododendron","Montgolfière","Abracadabra","Chlorophylle","Qualification","Métamorphose","Baccalauréat","Narrateur","Cabriolet","Printemps","Dangereux","Toujours","Scorpion","Gangster","Oxygène","Lionne","Thym","Rhum"];
+var mot = ["libre","charmant","champion","sardaigne","soleil","lune","montagne","solidaire","coquelicot","aventurier","labyrinthe","quadriceps","Maharadjah","Rhododendron","Montgolfière","Abracadabra","Chlorophylle","Qualification","Métamorphose","Baccalauréat","Narrateur","Cabriolet","Printemps","Dangereux","Toujours","Scorpion","Gangster","Oxygène","Lionne","Thym","Rhum"];
 
-    var randomWord = mot[(Math.random() * mot.length) | 0];
+var randomWord = mot[(Math.random() * mot.length) | 0];
+
 console.log(randomWord);
 // mot = randomWord;
 
@@ -45,18 +46,31 @@ function listener (){
         e.preventDefault();
         var valeurInput = input.value;
         console.log(valeurInput);
-        if(valeurInput < 0 || valeurInput > 1) return;
-        checkLettre(valeurInput);
+        checkCaract(valeurInput);
         ajoutLettre(valeurInput);
         input.value = "";
     });
 };
+
+function checkCaract(letterToTest){
+    let letterVerif = /^[A-Za-z]+$/;
+    if(letterToTest == "" || letterToTest == " " || !letterToTest.match(letterVerif)){
+        // quand il a rentré autre chose qu'une lettre
+        input.setAttribute("placeholder", "Veuillez saisir une minuscule");
+        return;
+    }
+    else{
+        // quand il a saisie une lettre
+        checkLettre(letterToTest);
+    }
+
+}
+
 function checkLettre(lettre){
     // checker si la valeur reçu est incluse dans ma chaîne de caractère (le mot a trouver)    
-    if(randomWord.includes(lettre)){
+    if(randomWord.includes(lettre.toLowerCase()) || randomWord.includes(lettre.toUpperCase())){
         console.log("je suis la");
         goodLetter(lettre);
-        
     }
     else{
         console.log("je ne fais pas parti du mot");
@@ -66,16 +80,17 @@ function checkLettre(lettre){
 };
 function goodLetter(lettre){
     let lettreDiv = document.getElementsByClassName('lettre-Div');
+    
     for(let i=0; i<randomWord.length; i++){
-        if(randomWord[i]==lettre){
+
+        if(randomWord[i] == lettre.toLowerCase() || randomWord[i] == lettre.toUpperCase()){
             lettreDiv[i].style.visibility = "visible";
         }
     }
 }
 //Stocker la lettre qui à été saisie
 function ajoutLettre(lettre){
-    let lettreVerif = /^[A-Za-z]+$/;
-    if(tabLettre.includes(lettre == "" || lettre == " " || !lettre.match(lettreVerif))){
+    if(tabLettre.includes(lettre)){
         input.setAttribute("placeholder", "Lettre déjà saisie !");
         return; 
     }
@@ -90,7 +105,6 @@ function motAfficher(){
     for (let i=0; i<randomWord.length; i++){
         let piece = randomWord.substring(i,i+1);
         tabMot.push(piece);
-        console.log(tabMot);
         let lettreDiv = document.createElement('div');
         lettreDiv.className = ('lettre-Div');
         afficherMot.appendChild(lettreDiv);
