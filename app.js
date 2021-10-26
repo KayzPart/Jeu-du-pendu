@@ -23,13 +23,17 @@ console.log(imageAfficher);
 
 var badLetter = 0;
 // Générer un mot à trouver 
-var mot = "bonjour"
+var mot = ["Libre","Charmant","Champion","Sardaigne","Soleil","Lune","Montagne","Solidaire","Coquelicot","Aventurier","Labyrinthe","Quadriceps","Maharadjah","Rhododendron","Montgolfière","Abracadabra","Chlorophylle","Qualification","Métamorphose","Baccalauréat","Narrateur","Cabriolet","Printemps","Dangereux","Toujours","Scorpion","Gangster","Oxygène","Lionne","Thym","Rhum"];
+
+    var randomWord = mot[(Math.random() * mot.length) | 0];
+console.log(randomWord);
 // mot = randomWord;
 
 var tabLettre = [];
 
 
 function play(){
+    
     listener();
     motAfficher();
 };
@@ -49,7 +53,7 @@ function listener (){
 };
 function checkLettre(lettre){
     // checker si la valeur reçu est incluse dans ma chaîne de caractère (le mot a trouver)    
-    if(mot.includes(lettre)){
+    if(randomWord.includes(lettre)){
         console.log("je suis la");
         goodLetter(lettre);
         
@@ -62,15 +66,16 @@ function checkLettre(lettre){
 };
 function goodLetter(lettre){
     let lettreDiv = document.getElementsByClassName('lettre-Div');
-    for(let i=0; i<mot.length; i++){
-        if(mot[i]==lettre){
+    for(let i=0; i<randomWord.length; i++){
+        if(randomWord[i]==lettre){
             lettreDiv[i].style.visibility = "visible";
         }
     }
 }
 //Stocker la lettre qui à été saisie
 function ajoutLettre(lettre){
-    if(tabLettre.includes(lettre)){
+    let lettreVerif = /^[A-Za-z]+$/;
+    if(tabLettre.includes(lettre == "" || lettre == " " || !lettre.match(lettreVerif))){
         input.setAttribute("placeholder", "Lettre déjà saisie !");
         return; 
     }
@@ -82,8 +87,8 @@ function ajoutLettre(lettre){
 };
 function motAfficher(){
     let tabMot = [];
-    for (let i=0; i<mot.length; i++){
-        let piece = mot.substring(i,i+1);
+    for (let i=0; i<randomWord.length; i++){
+        let piece = randomWord.substring(i,i+1);
         tabMot.push(piece);
         console.log(tabMot);
         let lettreDiv = document.createElement('div');
@@ -110,11 +115,7 @@ function looseGame(){
     btnRejouer.innerHTML = "Rejouer ?";
     container.insertBefore(btnRejouer,container.childNodes[2]);
     console.log(container);  
-    // btnRejouer.addEventListener
     btnRejouer.addEventListener('click', function(){
-        rejouer();
+        
     })
-}
-function rejouer(){
-    play();
 }
